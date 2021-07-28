@@ -53,12 +53,12 @@ With this upgrade guide, there are a few notes to consider:
 
 Unless otherwise noted due to extenuating requirements, upgrades from one patch release of Rook to
 another are as simple as updating the common resources and the image of the Rook operator. For
-example, when Rook v1.7.2 is released, the process of updating from v1.7.0 is as simple as running
+example, when Rook v1.7.1 is released, the process of updating from v1.7.0 is as simple as running
 the following:
 
 First get the latest common resources manifests that contain the latest changes for Rook v1.7.
 ```sh
-git clone --single-branch --depth=1 --branch v1.7.2 https://github.com/rook/rook.git
+git clone --single-branch --depth=1 --branch v1.7.1 https://github.com/rook/rook.git
 cd rook/cluster/examples/kubernetes/ceph
 ```
 
@@ -69,7 +69,7 @@ section for instructions on how to change the default namespaces in `common.yaml
 Then apply the latest changes from v1.7 and update the Rook Operator image.
 ```console
 kubectl apply -f common.yaml -f crds.yaml
-kubectl -n rook-ceph set image deploy/rook-ceph-operator rook-ceph-operator=rook/ceph:v1.7.2
+kubectl -n rook-ceph set image deploy/rook-ceph-operator rook-ceph-operator=rook/ceph:v1.7.1
 ```
 
 As exemplified above, it is a good practice to update Rook-Ceph common resources from the example
@@ -249,7 +249,7 @@ Any pod that is using a Rook volume should also remain healthy:
 ## Rook Operator Upgrade Process
 
 In the examples given in this guide, we will be upgrading a live Rook cluster running `v1.6.8` to
-the version `v1.7.2`. This upgrade should work from any official patch release of Rook v1.6 to any
+the version `v1.7.0`. This upgrade should work from any official patch release of Rook v1.6 to any
 official patch release of v1.7.
 
 **Rook release from `master` are expressly unsupported.** It is strongly recommended that you use
@@ -264,6 +264,10 @@ parameterize the environment correctly. Merely repeat these steps for each Rook-
 if applicable.
 
 Let's get started!
+
+> **IMPORTANT** If your CephCluster has specified `driveGroups` in the spec, you must follow the
+> instructions to [migrate the Drive Group spec](#migrate-the-drive-group-spec) before performing
+> any of the upgrade steps below.
 
 ### **1. Update common resources and CRDs**
 
@@ -307,14 +311,14 @@ step to upgrade the Prometheus RBAC resources as well.
 kubectl apply -f cluster/examples/kubernetes/ceph/monitoring/rbac.yaml
 ```
 
-### Updates for optional resources
+#### **Updates for optional resources**
 If you have [Prometheus monitoring](ceph-monitoring.md) enabled, follow the
 step to upgrade the Prometheus RBAC resources as well.
 ```sh
 kubectl apply -f cluster/examples/kubernetes/ceph/monitoring/rbac.yaml
 ```
 
-## 2. Update Ceph CSI versions
+### **2. Update Ceph CSI versions**
 
 > Automatically updated if you are upgrading via the helm chart
 
@@ -332,7 +336,7 @@ The largest portion of the upgrade is triggered when the operator's image is upd
 When the operator is updated, it will proceed to update all of the Ceph daemons.
 
 ```sh
-kubectl -n $ROOK_OPERATOR_NAMESPACE set image deploy/rook-ceph-operator rook-ceph-operator=rook/ceph:v1.7.2
+kubectl -n $ROOK_OPERATOR_NAMESPACE set image deploy/rook-ceph-operator rook-ceph-operator=rook/ceph:v1.7.0
 ```
 
 ### **4. Wait for the upgrade to complete**
@@ -348,16 +352,16 @@ watch --exec kubectl -n $ROOK_CLUSTER_NAMESPACE get deployments -l rook_cluster=
 ```
 
 As an example, this cluster is midway through updating the OSDs. When all deployments report `1/1/1`
-availability and `rook-version=v1.7.2`, the Ceph cluster's core components are fully updated.
+availability and `rook-version=v1.7.0`, the Ceph cluster's core components are fully updated.
 
 >```
 >Every 2.0s: kubectl -n rook-ceph get deployment -o j...
 >
->rook-ceph-mgr-a         req/upd/avl: 1/1/1      rook-version=v1.7.2
->rook-ceph-mon-a         req/upd/avl: 1/1/1      rook-version=v1.7.2
->rook-ceph-mon-b         req/upd/avl: 1/1/1      rook-version=v1.7.2
->rook-ceph-mon-c         req/upd/avl: 1/1/1      rook-version=v1.7.2
->rook-ceph-osd-0         req/upd/avl: 1//        rook-version=v1.7.2
+>rook-ceph-mgr-a         req/upd/avl: 1/1/1      rook-version=v1.7.0
+>rook-ceph-mon-a         req/upd/avl: 1/1/1      rook-version=v1.7.0
+>rook-ceph-mon-b         req/upd/avl: 1/1/1      rook-version=v1.7.0
+>rook-ceph-mon-c         req/upd/avl: 1/1/1      rook-version=v1.7.0
+>rook-ceph-osd-0         req/upd/avl: 1//        rook-version=v1.7.0
 >rook-ceph-osd-1         req/upd/avl: 1/1/1      rook-version=v1.6.8
 >rook-ceph-osd-2         req/upd/avl: 1/1/1      rook-version=v1.6.8
 >```
@@ -369,14 +373,14 @@ An easy check to see if the upgrade is totally finished is to check that there i
 # kubectl -n $ROOK_CLUSTER_NAMESPACE get deployment -l rook_cluster=$ROOK_CLUSTER_NAMESPACE -o jsonpath='{range .items[*]}{"rook-version="}{.metadata.labels.rook-version}{"\n"}{end}' | sort | uniq
 This cluster is not yet finished:
   rook-version=v1.6.8
-  rook-version=v1.7.2
+  rook-version=v1.7.0
 This cluster is finished:
-  rook-version=v1.7.2
+  rook-version=v1.7.0
 ```
 
 ### **5. Verify the updated cluster**
 
-At this point, your Rook operator should be running version `rook/ceph:v1.7.2`.
+At this point, your Rook operator should be running version `rook/ceph:v1.7.0`.
 
 Verify the Ceph cluster's health using the [health verification section](#health-verification).
 
@@ -404,9 +408,6 @@ until all the daemons have been updated.
 
 ### **Ceph images**
 
-Official Ceph container images can be found on [Quay](https://quay.io/repository/ceph/ceph?tab=tags).
-Prior to August 2021, official images were on docker.io. While those images will remain on Docker Hub, all new images are being pushed to Quay.
-
 These images are tagged in a few ways:
 
 * The most explicit form of tags are full-ceph-version-and-build tags (e.g., `v16.2.5-20210708`).
@@ -417,7 +418,7 @@ These images are tagged in a few ways:
 
 **Ceph containers other than the official images from the registry above will not be supported.**
 
-### **Example upgrade to Ceph Pacific**
+### **Example upgrade to Ceph Octopus**
 
 #### **1. Update the main Ceph daemons**
 
@@ -502,6 +503,6 @@ k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.2.0
 k8s.gcr.io/sig-storage/csi-provisioner:v2.2.2
 k8s.gcr.io/sig-storage/csi-resizer:v1.2.0
 k8s.gcr.io/sig-storage/csi-snapshotter:v4.1.1
-quay.io/cephcsi/cephcsi:v3.4.0
+quay.io/cephcsi/cephcsi:v3.3.1
 quay.io/csiaddons/volumereplication-operator:v0.1.0
 ```
