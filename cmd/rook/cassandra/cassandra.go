@@ -28,7 +28,7 @@ var Cmd = &cobra.Command{
 }
 
 var (
-	logger = capnslog.NewPackageLogger("github.com/rook/rook", "cassandracmd")
+	logger = capnslog.NewPackageLogger("github.com/rook/cassandra", "cassandracmd")
 )
 
 func init() {

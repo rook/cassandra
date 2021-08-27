@@ -19,8 +19,8 @@ limitations under the License.
 package cassandra
 
 import (
-	v1alpha1 "github.com/rook/rook/pkg/client/informers/externalversions/cassandra.rook.io/v1alpha1"
-	internalinterfaces "github.com/rook/rook/pkg/client/informers/externalversions/internalinterfaces"
+	v1alpha1 "github.com/rook/cassandra/pkg/client/informers/externalversions/cassandra.rook.io/v1alpha1"
+	internalinterfaces "github.com/rook/cassandra/pkg/client/informers/externalversions/internalinterfaces"
 )
 
 // Interface provides access to each of this group's versions.

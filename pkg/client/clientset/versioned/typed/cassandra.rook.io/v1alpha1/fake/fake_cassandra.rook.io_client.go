@@ -19,7 +19,7 @@ limitations under the License.
 package fake
 
 import (
-	v1alpha1 "github.com/rook/rook/pkg/client/clientset/versioned/typed/cassandra.rook.io/v1alpha1"
+	v1alpha1 "github.com/rook/cassandra/pkg/client/clientset/versioned/typed/cassandra.rook.io/v1alpha1"
 	rest "k8s.io/client-go/rest"
 	testing "k8s.io/client-go/testing"
 )

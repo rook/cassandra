@@ -18,13 +18,14 @@ package utils
 
 import (
 	"fmt"
-	"gopkg.in/yaml.v2"
 	"os"
 	"path"
 	"path/filepath"
 
+	"gopkg.in/yaml.v2"
+
 	"github.com/pkg/errors"
-	"github.com/rook/rook/pkg/util/exec"
+	"github.com/rook/cassandra/pkg/util/exec"
 )
 
 // HelmHelper is wrapper for running helm commands

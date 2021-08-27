@@ -17,8 +17,8 @@ limitations under the License.
 package util
 
 import (
-	cassandrav1alpha1 "github.com/rook/rook/pkg/apis/cassandra.rook.io/v1alpha1"
-	"github.com/rook/rook/pkg/operator/cassandra/constants"
+	cassandrav1alpha1 "github.com/rook/cassandra/pkg/apis/cassandra.rook.io/v1alpha1"
+	"github.com/rook/cassandra/pkg/operator/cassandra/constants"
 	appsv1 "k8s.io/api/apps/v1"
 	"k8s.io/apimachinery/pkg/labels"
 )

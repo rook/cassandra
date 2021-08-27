@@ -27,8 +27,8 @@ import (
 
 	"github.com/coreos/pkg/capnslog"
 	"github.com/pkg/errors"
-	"github.com/rook/rook/pkg/clusterd"
-	rookversion "github.com/rook/rook/pkg/version"
+	"github.com/rook/cassandra/pkg/clusterd"
+	rookversion "github.com/rook/cassandra/pkg/version"
 	v1 "k8s.io/api/core/v1"
 	kerrors "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -38,7 +38,7 @@ import (
 	"k8s.io/client-go/tools/cache"
 )
 
-var logger = capnslog.NewPackageLogger("github.com/rook/rook", "op-k8sutil")
+var logger = capnslog.NewPackageLogger("github.com/rook/cassandra", "op-k8sutil")
 
 const (
 	// Namespace for rook

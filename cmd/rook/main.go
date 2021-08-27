@@ -18,12 +18,10 @@ package main
 import (
 	"fmt"
 
-	"github.com/rook/rook/cmd/rook/cassandra"
-	"github.com/rook/rook/cmd/rook/ceph"
-	"github.com/rook/rook/cmd/rook/nfs"
-	rook "github.com/rook/rook/cmd/rook/rook"
-	"github.com/rook/rook/cmd/rook/util"
-	"github.com/rook/rook/cmd/rook/version"
+	"github.com/rook/cassandra/cmd/rook/cassandra"
+	rook "github.com/rook/cassandra/cmd/rook/rook"
+	"github.com/rook/cassandra/cmd/rook/util"
+	"github.com/rook/cassandra/cmd/rook/version"
 )
 
 func main() {
@@ -36,10 +34,7 @@ func main() {
 func addCommands() {
 	rook.RootCmd.AddCommand(
 		version.VersionCmd,
-		discoverCmd,
 		// backend commands
-		ceph.Cmd,
-		nfs.Cmd,
 		cassandra.Cmd,
 
 		// util commands

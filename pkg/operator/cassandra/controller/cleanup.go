@@ -20,8 +20,8 @@ import (
 	"context"
 	"fmt"
 
-	cassandrav1alpha1 "github.com/rook/rook/pkg/apis/cassandra.rook.io/v1alpha1"
-	"github.com/rook/rook/pkg/operator/cassandra/controller/util"
+	cassandrav1alpha1 "github.com/rook/cassandra/pkg/apis/cassandra.rook.io/v1alpha1"
+	"github.com/rook/cassandra/pkg/operator/cassandra/controller/util"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )

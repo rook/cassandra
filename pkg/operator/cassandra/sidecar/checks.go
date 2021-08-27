@@ -18,9 +18,10 @@ package sidecar
 
 import (
 	"fmt"
-	"github.com/rook/rook/pkg/operator/cassandra/constants"
-	"github.com/yanniszark/go-nodetool/nodetool"
 	"net/http"
+
+	"github.com/rook/cassandra/pkg/operator/cassandra/constants"
+	"github.com/yanniszark/go-nodetool/nodetool"
 )
 
 // setupHTTPChecks brings up the liveness and readiness probes

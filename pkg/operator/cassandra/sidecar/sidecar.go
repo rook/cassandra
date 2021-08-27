@@ -27,9 +27,9 @@ import (
 
 	"github.com/coreos/pkg/capnslog"
 	"github.com/davecgh/go-spew/spew"
-	cassandrav1alpha1 "github.com/rook/rook/pkg/apis/cassandra.rook.io/v1alpha1"
-	rookClientset "github.com/rook/rook/pkg/client/clientset/versioned"
-	"github.com/rook/rook/pkg/operator/cassandra/constants"
+	cassandrav1alpha1 "github.com/rook/cassandra/pkg/apis/cassandra.rook.io/v1alpha1"
+	rookClientset "github.com/rook/cassandra/pkg/client/clientset/versioned"
+	"github.com/rook/cassandra/pkg/operator/cassandra/constants"
 	"github.com/yanniszark/go-nodetool/nodetool"
 	corev1 "k8s.io/api/core/v1"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
@@ -70,7 +70,7 @@ func New(
 	serviceInformer coreinformers.ServiceInformer,
 ) (*MemberController, error) {
 	ctx := context.TODO()
-	logger := capnslog.NewPackageLogger("github.com/rook/rook", "sidecar")
+	logger := capnslog.NewPackageLogger("github.com/rook/cassandra", "sidecar")
 	// Get the member's service
 	var memberService *corev1.Service
 	var err error

@@ -16,13 +16,9 @@ limitations under the License.
 package k8sutil
 
 import (
-	"context"
-	"fmt"
 	"os"
 	"testing"
 
-	cephv1 "github.com/rook/rook/pkg/apis/ceph.rook.io/v1"
-	"github.com/rook/rook/pkg/operator/test"
 	"github.com/stretchr/testify/assert"
 	v1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -172,96 +168,4 @@ func TestAddUnreachableNodeToleration(t *testing.T) {
 	assert.Equal(t, 1, len(podSpec.Tolerations))
 	assert.Equal(t, expectedURToleration, podSpec.Tolerations[0])
 
-}
-
-func testPodSpecPlacement(t *testing.T, requiredDuringScheduling bool, req, pref int, placement *cephv1.Placement) {
-	spec := v1.PodSpec{
-		InitContainers: []v1.Container{},
-		Containers:     []v1.Container{},
-		RestartPolicy:  v1.RestartPolicyAlways,
-	}
-
-	placement.ApplyToPodSpec(&spec)
-	SetNodeAntiAffinityForPod(&spec, requiredDuringScheduling, v1.LabelHostname, map[string]string{"app": "mon"}, nil)
-
-	// should have a required anti-affinity and no preferred anti-affinity
-	assert.Equal(t,
-		req,
-		len(spec.Affinity.PodAntiAffinity.RequiredDuringSchedulingIgnoredDuringExecution))
-}
-
-func makePlacement() cephv1.Placement {
-	return cephv1.Placement{
-		PodAntiAffinity: &v1.PodAntiAffinity{
-			RequiredDuringSchedulingIgnoredDuringExecution: []v1.PodAffinityTerm{
-				{
-					TopologyKey: v1.LabelZoneFailureDomain,
-				},
-			},
-			PreferredDuringSchedulingIgnoredDuringExecution: []v1.WeightedPodAffinityTerm{
-				{
-					PodAffinityTerm: v1.PodAffinityTerm{
-						TopologyKey: v1.LabelZoneFailureDomain,
-					},
-				},
-			},
-		},
-	}
-}
-
-func TestPodSpecPlacement(t *testing.T) {
-	// no placement settings in the crd
-	p := cephv1.Placement{}
-	testPodSpecPlacement(t, true, 1, 0, &p)
-	testPodSpecPlacement(t, false, 0, 1, &p)
-	testPodSpecPlacement(t, false, 0, 0, &p)
-
-	// crd has other preferred and required anti-affinity setting
-	p = makePlacement()
-	testPodSpecPlacement(t, true, 2, 1, &p)
-	p = makePlacement()
-	testPodSpecPlacement(t, false, 1, 2, &p)
-}
-
-func TestIsMonScheduled(t *testing.T) {
-	ctx := context.TODO()
-	clientset := test.New(t, 1)
-	pod := v1.Pod{
-		ObjectMeta: metav1.ObjectMeta{
-			Name:      "mon-pod",
-			Namespace: "ns",
-			Labels: map[string]string{
-				"app":            "rook-ceph-mon",
-				"ceph_daemon_id": "a",
-			},
-		},
-	}
-
-	// no pods running
-	isScheduled, err := IsPodScheduled(clientset, "ns", "a")
-	assert.Error(t, err)
-	assert.False(t, isScheduled)
-
-	selector := fmt.Sprintf("%s=%s,%s=%s", AppAttr, "rook-ceph-mon", "ceph_daemon_id", "a")
-
-	// unscheduled pod
-	_, err = clientset.CoreV1().Pods("ns").Create(ctx, &pod, metav1.CreateOptions{})
-	assert.NoError(t, err)
-	isScheduled, err = IsPodScheduled(clientset, "ns", selector)
-	assert.NoError(t, err)
-	assert.False(t, isScheduled)
-
-	// scheduled pod
-	pod.Spec.NodeName = "node0"
-	_, err = clientset.CoreV1().Pods("ns").Update(ctx, &pod, metav1.UpdateOptions{})
-	assert.NoError(t, err)
-	isScheduled, err = IsPodScheduled(clientset, "ns", selector)
-	assert.NoError(t, err)
-	assert.True(t, isScheduled)
-
-	// no pods found
-	assert.NoError(t, err)
-	isScheduled, err = IsPodScheduled(clientset, "ns", "b")
-	assert.Error(t, err)
-	assert.False(t, isScheduled)
 }

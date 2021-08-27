@@ -20,9 +20,9 @@ import (
 	"testing"
 	"time"
 
-	rookfake "github.com/rook/rook/pkg/client/clientset/versioned/fake"
-	rookScheme "github.com/rook/rook/pkg/client/clientset/versioned/scheme"
-	rookinformers "github.com/rook/rook/pkg/client/informers/externalversions"
+	rookfake "github.com/rook/cassandra/pkg/client/clientset/versioned/fake"
+	rookScheme "github.com/rook/cassandra/pkg/client/clientset/versioned/scheme"
+	rookinformers "github.com/rook/cassandra/pkg/client/informers/externalversions"
 	"github.com/stretchr/testify/assert"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/runtime"
