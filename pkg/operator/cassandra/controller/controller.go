@@ -23,12 +23,12 @@ import (
 
 	"github.com/coreos/pkg/capnslog"
 	"github.com/davecgh/go-spew/spew"
-	cassandrav1alpha1 "github.com/rook/rook/pkg/apis/cassandra.rook.io/v1alpha1"
-	rookClientset "github.com/rook/rook/pkg/client/clientset/versioned"
-	rookScheme "github.com/rook/rook/pkg/client/clientset/versioned/scheme"
-	informersv1alpha1 "github.com/rook/rook/pkg/client/informers/externalversions/cassandra.rook.io/v1alpha1"
-	listersv1alpha1 "github.com/rook/rook/pkg/client/listers/cassandra.rook.io/v1alpha1"
-	"github.com/rook/rook/pkg/operator/cassandra/controller/util"
+	cassandrav1alpha1 "github.com/rook/cassandra/pkg/apis/cassandra.rook.io/v1alpha1"
+	rookClientset "github.com/rook/cassandra/pkg/client/clientset/versioned"
+	rookScheme "github.com/rook/cassandra/pkg/client/clientset/versioned/scheme"
+	informersv1alpha1 "github.com/rook/cassandra/pkg/client/informers/externalversions/cassandra.rook.io/v1alpha1"
+	listersv1alpha1 "github.com/rook/cassandra/pkg/client/listers/cassandra.rook.io/v1alpha1"
+	"github.com/rook/cassandra/pkg/operator/cassandra/controller/util"
 	appsv1 "k8s.io/api/apps/v1"
 	corev1 "k8s.io/api/core/v1"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
@@ -52,7 +52,7 @@ const (
 	clusterQueueName = "cluster-queue"
 )
 
-var logger = capnslog.NewPackageLogger("github.com/rook/rook", "cassandra-controller")
+var logger = capnslog.NewPackageLogger("github.com/rook/cassandra", "cassandra-controller")
 
 // ClusterController encapsulates all the tools the controller needs
 // in order to talk to the Kubernetes API

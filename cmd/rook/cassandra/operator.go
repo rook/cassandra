@@ -20,11 +20,11 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/rook/rook/cmd/rook/rook"
-	rookinformers "github.com/rook/rook/pkg/client/informers/externalversions"
-	"github.com/rook/rook/pkg/operator/cassandra/constants"
-	"github.com/rook/rook/pkg/operator/cassandra/controller"
-	"github.com/rook/rook/pkg/util/flags"
+	"github.com/rook/cassandra/cmd/rook/rook"
+	rookinformers "github.com/rook/cassandra/pkg/client/informers/externalversions"
+	"github.com/rook/cassandra/pkg/operator/cassandra/constants"
+	"github.com/rook/cassandra/pkg/operator/cassandra/controller"
+	"github.com/rook/cassandra/pkg/util/flags"
 	"github.com/spf13/cobra"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apiserver/pkg/server"
@@ -37,7 +37,7 @@ var operatorCmd = &cobra.Command{
 	Use:   "operator",
 	Short: "Runs the cassandra operator to deploy and manage cassandra in Kubernetes",
 	Long: `Runs the cassandra operator to deploy and manage cassandra in kubernetes clusters.
-https://github.com/rook/rook`,
+https://github.com/rook/cassandra`,
 }
 
 func init() {

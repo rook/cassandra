@@ -21,7 +21,7 @@ limitations under the License.
 package v1alpha1
 
 import (
-	rookio "github.com/rook/rook/pkg/apis/rook.io"
+	rookio "github.com/rook/cassandra/pkg/apis/rook.io"
 	v1 "k8s.io/api/core/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 )

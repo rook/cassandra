@@ -175,7 +175,7 @@ Our `golang` strongly typed definitions would look like the following, where the
 `types.go`:
 
 ```go
-package v1alpha1 // "github.com/rook/rook/pkg/apis/ceph.rook.io/v1alpha1"
+package v1alpha1 // "github.com/rook/cassandra/pkg/apis/ceph.rook.io/v1alpha1"
 
 import (
   metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -313,9 +313,9 @@ Other backend operators could do a similar thing for their node/device level con
 
 As previously mentioned, the `rook.io` API group will also define some other useful `*Spec` types:
 
-* `PlacementSpec`: Defines placement requirements for components of the storage provider, such as node and pod affinity.  This is similar to the existing [Ceph focused `PlacementSpec`](https://github.com/rook/rook/blob/release-0.7/pkg/apis/rook.io/v1alpha1/types.go#L141), but in a generic way that is reusable by all storage providers.  A `PlacementSpec` will essentially be a map of placement information structs that are indexed by component name.
+* `PlacementSpec`: Defines placement requirements for components of the storage provider, such as node and pod affinity.  This is similar to the existing [Ceph focused `PlacementSpec`](https://github.com/rook/cassandra/blob/release-0.7/pkg/apis/rook.io/v1alpha1/types.go#L141), but in a generic way that is reusable by all storage providers.  A `PlacementSpec` will essentially be a map of placement information structs that are indexed by component name.
 * `NetworkSpec`: Defines the network configuration for the storage provider, such as `hostNetwork`.
-* `ResourceSpec`: Defines the resource usage of the provider, allowing limits on CPU and memory, similar to the existing [Ceph focused `ResourceSpec`](https://github.com/rook/rook/blob/release-0.7/pkg/apis/rook.io/v1alpha1/types.go#L85).
+* `ResourceSpec`: Defines the resource usage of the provider, allowing limits on CPU and memory, similar to the existing [Ceph focused `ResourceSpec`](https://github.com/rook/cassandra/blob/release-0.7/pkg/apis/rook.io/v1alpha1/types.go#L85).
 
 #### Additional Types
 
