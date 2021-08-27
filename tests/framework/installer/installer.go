@@ -22,7 +22,7 @@ import (
 	"testing"
 
 	"github.com/coreos/pkg/capnslog"
-	"github.com/rook/rook/tests/framework/utils"
+	"github.com/rook/cassandra/tests/framework/utils"
 	"github.com/stretchr/testify/assert"
 	"k8s.io/apimachinery/pkg/api/errors"
 )
@@ -38,7 +38,7 @@ const (
 )
 
 var (
-	logger              = capnslog.NewPackageLogger("github.com/rook/rook", "installer")
+	logger              = capnslog.NewPackageLogger("github.com/rook/cassandra", "installer")
 	createArgs          = []string{"create", "-f"}
 	createFromStdinArgs = append(createArgs, "-")
 	deleteArgs          = []string{"delete", "-f"}

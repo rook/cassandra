@@ -20,10 +20,10 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/rook/rook/cmd/rook/rook"
-	"github.com/rook/rook/pkg/operator/cassandra/sidecar"
-	"github.com/rook/rook/pkg/operator/k8sutil"
-	"github.com/rook/rook/pkg/util/flags"
+	"github.com/rook/cassandra/cmd/rook/rook"
+	"github.com/rook/cassandra/pkg/operator/cassandra/sidecar"
+	"github.com/rook/cassandra/pkg/operator/k8sutil"
+	"github.com/rook/cassandra/pkg/util/flags"
 	"github.com/spf13/cobra"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apiserver/pkg/server"
@@ -35,7 +35,7 @@ var sidecarCmd = &cobra.Command{
 	Use:   "sidecar",
 	Short: "Runs the cassandra sidecar to deploy and manage cassandra in Kubernetes",
 	Long: `Runs the cassandra sidecar to deploy and manage cassandra in kubernetes clusters.
-https://github.com/rook/rook`,
+https://github.com/rook/cassandra`,
 }
 
 func init() {

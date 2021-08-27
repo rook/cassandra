@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"strings"
 
-	cassandrav1alpha1 "github.com/rook/rook/pkg/apis/cassandra.rook.io/v1alpha1"
+	cassandrav1alpha1 "github.com/rook/cassandra/pkg/apis/cassandra.rook.io/v1alpha1"
 )
 
 type CassandraManifests struct{}

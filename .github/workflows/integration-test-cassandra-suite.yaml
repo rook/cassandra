@@ -12,7 +12,6 @@ defaults:
 
 jobs:
   TestCassandraSuite:
-    if: ${{ github.event_name == 'pull_request' && github.ref != 'refs/heads/master' && contains(github.event.pull_request.labels.*.name, 'cassandra')}}
     runs-on: ubuntu-18.04
     strategy:
       fail-fast: false
@@ -48,14 +47,14 @@ jobs:
 
     - name: TestCassandraSuite
       run: |
-        go test -v -timeout 1800s -run CassandraSuite github.com/rook/rook/tests/integration
+        go test -v -timeout 1800s -run CassandraSuite github.com/rook/cassandra/tests/integration
 
     - name: Artifact
       uses: actions/upload-artifact@v2
       if: failure()
       with:
         name: cassandra-suite-artifact
-        path: /home/runner/work/rook/rook/tests/integration/_output/tests/
+        path: /home/runner/work/rook/cassandra/tests/integration/_output/tests/
 
     - name: setup tmate session for debugging
       if: failure()
