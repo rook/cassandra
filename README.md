@@ -20,7 +20,7 @@ Rook is hosted by the [Cloud Native Computing Foundation](https://cncf.io) (CNCF
 
 ## Getting Started and Documentation
 
-For installation, deployment, and administration, see our [Documentation](https://rook.github.io/docs/rook/master).
+For installation, deployment, and administration of the Cassandra storage provider, see our [Documentation](https://rook.io/docs/cassandra/master).
 
 ## Contributing
 
@@ -64,23 +64,19 @@ Anyone who wants to discuss the direction of the project, design and implementat
 
 ## Project Status
 
-The status of each storage provider supported by Rook can be found in the table below.
-Each API group is assigned its own individual status to reflect their varying maturity and stability.
-More details about API versioning and status in Kubernetes can be found on the Kubernetes [API versioning page](https://kubernetes.io/docs/concepts/overview/kubernetes-api/#api-versioning), but the key difference between the statuses are summarized below:
+The status of each storage provider supported by Rook can be found in the [main Rook repo](https://github.com/rook/rook#project-status).
 
-- **Alpha:** The API may change in incompatible ways in a later software release without notice, recommended for use only in short-lived testing clusters, due to increased risk of bugs and lack of long-term support.
-- **Beta:** Support for the overall features will not be dropped, though details may change. Support for upgrading or migrating between versions will be provided, either through automation or manual steps.
-- **Stable:** Features will appear in released software for many subsequent versions and support for upgrading between versions will be provided with software automation in the vast majority of scenarios.
-
-| Name        | Details                                                                                                                                                                                                                                                                                                                | API Group                    | Status                                                                         |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- | ------------------------------------------------------------------------------ |
-| Cassandra   | [Cassandra](http://cassandra.apache.org/) is a highly available NoSQL database featuring lightning fast performance, tunable consistency and massive scalability. [Scylla](https://www.scylladb.com) is a close-to-the-hardware rewrite of Cassandra in C++, which enables much lower latencies and higher throughput. | cassandra.rook.io/v1alpha1   | Alpha                                                                          |
+| Name      | Details                                                                                                                                                                                                                                                                                                                | API Group                  | Status |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- | ------ |
+| Cassandra | [Cassandra](http://cassandra.apache.org/) is a highly available NoSQL database featuring lightning fast performance, tunable consistency and massive scalability. [Scylla](https://www.scylladb.com) is a close-to-the-hardware rewrite of Cassandra in C++, which enables much lower latencies and higher throughput. | cassandra.rook.io/v1alpha1 | Alpha  |
 
 ### Official Releases
 
-Official releases of Rook can be found on the [releases page](https://github.com/rook/cassandra/releases).
+Official releases of the Cassandra operator can be found on the [releases page](https://github.com/rook/cassandra/releases).
 Please note that it is **strongly recommended** that you use [official releases](https://github.com/rook/cassandra/releases) of Rook, as unreleased versions from the master branch are subject to changes and incompatibilities that will not be supported in the official releases.
 Builds from the master branch can have functionality changed and even removed at any time without compatibility support and without prior notice.
+
+Releases of the Cassandra operator prior to v1.7 are found in the main [Rook repo](https://github.com/rook/rook/releases).
 
 ## Licensing
 
