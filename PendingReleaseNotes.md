@@ -11,14 +11,8 @@ v1.8...
 Rook-Cassandra v1.8 is separated from the main Rook project and can be released independently. This
 is currently the last planned release of Rook-Cassandra.
 
-### Ceph
-
 ## Features
 
 ### Core
 
-### Ceph
-
 ### Cassandra
-
-### NFS
