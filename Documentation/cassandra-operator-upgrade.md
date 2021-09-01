@@ -1,7 +1,6 @@
 ---
-title: Upgrade
-weight: 5100
-indent: true
+title: Cassandra Upgrade
+weight: 6000
 ---
 
 # Cassandra Operator Upgrades
