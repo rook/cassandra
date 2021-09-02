@@ -36,7 +36,7 @@ DOCS_WORK_DIR := $(WORK_DIR)/rook.github.io
 DOCS_VERSION_DIR := $(DOCS_WORK_DIR)/docs/cassandra/$(DOCS_VERSION)
 
 ifdef GIT_API_TOKEN
-DOCS_GIT_REPO := https://$(GIT_API_TOKEN)@github.com/rook/cassandra.github.io.git
+DOCS_GIT_REPO := https://$(GIT_API_TOKEN)@github.com/rook/rook.github.io.git
 else
 DOCS_GIT_REPO := git@github.com:rook/rook.github.io.git
 endif
