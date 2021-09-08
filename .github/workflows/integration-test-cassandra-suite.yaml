@@ -12,12 +12,11 @@ defaults:
 
 jobs:
   TestCassandraSuite:
-    if: ${{ github.event_name == 'pull_request' && github.ref != 'refs/heads/master' && contains(github.event.pull_request.labels.*.name, 'cassandra')}}
     runs-on: ubuntu-18.04
     strategy:
       fail-fast: false
       matrix:
-        kubernetes-versions : ['v1.16.15', 'v1.21.0']
+        kubernetes-versions : ['v1.17.17', 'v1.22.0']
     steps:
     - name: checkout
       uses: actions/checkout@v2
@@ -32,7 +31,7 @@ jobs:
     - name: setup minikube
       uses: manusa/actions-setup-minikube@v2.4.2
       with:
-        minikube version: 'v1.21.0'
+        minikube version: 'v1.22.0'
         kubernetes version: ${{ matrix.kubernetes-versions }}
         start args: --memory 6g --cpus=2
         github token: ${{ secrets.GITHUB_TOKEN }}
@@ -48,16 +47,16 @@ jobs:
 
     - name: TestCassandraSuite
       run: |
-        go test -v -timeout 1800s -run CassandraSuite github.com/rook/rook/tests/integration
+        go test -v -timeout 1800s -run CassandraSuite github.com/rook/cassandra/tests/integration
 
     - name: Artifact
       uses: actions/upload-artifact@v2
       if: failure()
       with:
         name: cassandra-suite-artifact
-        path: /home/runner/work/rook/rook/tests/integration/_output/tests/
+        path: /home/runner/work/rook/cassandra/tests/integration/_output/tests/
 
     - name: setup tmate session for debugging
       if: failure()
       uses: mxschmitt/action-tmate@v3
-      timeout-minutes: 120
+      timeout-minutes: 60

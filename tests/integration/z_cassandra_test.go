@@ -22,9 +22,9 @@ import (
 	"testing"
 	"time"
 
-	cassandrav1alpha1 "github.com/rook/rook/pkg/apis/cassandra.rook.io/v1alpha1"
-	"github.com/rook/rook/tests/framework/installer"
-	"github.com/rook/rook/tests/framework/utils"
+	cassandrav1alpha1 "github.com/rook/cassandra/pkg/apis/cassandra.rook.io/v1alpha1"
+	"github.com/rook/cassandra/tests/framework/installer"
+	"github.com/rook/cassandra/tests/framework/utils"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"

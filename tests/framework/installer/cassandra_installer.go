@@ -21,8 +21,8 @@ import (
 	"fmt"
 	"testing"
 
-	cassandrav1alpha1 "github.com/rook/rook/pkg/apis/cassandra.rook.io/v1alpha1"
-	"github.com/rook/rook/tests/framework/utils"
+	cassandrav1alpha1 "github.com/rook/cassandra/pkg/apis/cassandra.rook.io/v1alpha1"
+	"github.com/rook/cassandra/tests/framework/utils"
 	"github.com/stretchr/testify/assert"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )

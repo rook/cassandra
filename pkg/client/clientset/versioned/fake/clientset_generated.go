@@ -19,15 +19,11 @@ limitations under the License.
 package fake
 
 import (
-	clientset "github.com/rook/rook/pkg/client/clientset/versioned"
-	cassandrav1alpha1 "github.com/rook/rook/pkg/client/clientset/versioned/typed/cassandra.rook.io/v1alpha1"
-	fakecassandrav1alpha1 "github.com/rook/rook/pkg/client/clientset/versioned/typed/cassandra.rook.io/v1alpha1/fake"
-	cephv1 "github.com/rook/rook/pkg/client/clientset/versioned/typed/ceph.rook.io/v1"
-	fakecephv1 "github.com/rook/rook/pkg/client/clientset/versioned/typed/ceph.rook.io/v1/fake"
-	nfsv1alpha1 "github.com/rook/rook/pkg/client/clientset/versioned/typed/nfs.rook.io/v1alpha1"
-	fakenfsv1alpha1 "github.com/rook/rook/pkg/client/clientset/versioned/typed/nfs.rook.io/v1alpha1/fake"
-	rookv1alpha2 "github.com/rook/rook/pkg/client/clientset/versioned/typed/rook.io/v1alpha2"
-	fakerookv1alpha2 "github.com/rook/rook/pkg/client/clientset/versioned/typed/rook.io/v1alpha2/fake"
+	clientset "github.com/rook/cassandra/pkg/client/clientset/versioned"
+	cassandrav1alpha1 "github.com/rook/cassandra/pkg/client/clientset/versioned/typed/cassandra.rook.io/v1alpha1"
+	fakecassandrav1alpha1 "github.com/rook/cassandra/pkg/client/clientset/versioned/typed/cassandra.rook.io/v1alpha1/fake"
+	rookv1alpha2 "github.com/rook/cassandra/pkg/client/clientset/versioned/typed/rook.io/v1alpha2"
+	fakerookv1alpha2 "github.com/rook/cassandra/pkg/client/clientset/versioned/typed/rook.io/v1alpha2/fake"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/discovery"
@@ -85,16 +81,6 @@ var _ clientset.Interface = &Clientset{}
 // CassandraV1alpha1 retrieves the CassandraV1alpha1Client
 func (c *Clientset) CassandraV1alpha1() cassandrav1alpha1.CassandraV1alpha1Interface {
 	return &fakecassandrav1alpha1.FakeCassandraV1alpha1{Fake: &c.Fake}
-}
-
-// CephV1 retrieves the CephV1Client
-func (c *Clientset) CephV1() cephv1.CephV1Interface {
-	return &fakecephv1.FakeCephV1{Fake: &c.Fake}
-}
-
-// NfsV1alpha1 retrieves the NfsV1alpha1Client
-func (c *Clientset) NfsV1alpha1() nfsv1alpha1.NfsV1alpha1Interface {
-	return &fakenfsv1alpha1.FakeNfsV1alpha1{Fake: &c.Fake}
 }
 
 // RookV1alpha2 retrieves the RookV1alpha2Client

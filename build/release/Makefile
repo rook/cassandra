@@ -15,7 +15,6 @@
 all: build
 
 include ../makelib/common.mk
-include ../makelib/helm.mk
 
 # ====================================================================================
 # Options
@@ -34,7 +33,7 @@ endif
 DOCS_VERSION := $(shell echo $(BRANCH_NAME) | sed -E "s/^release\-([0-9]+)\.([0-9]+)$$/v\1.\2/g")
 DOCS_DIR ?= $(ROOT_DIR)/Documentation
 DOCS_WORK_DIR := $(WORK_DIR)/rook.github.io
-DOCS_VERSION_DIR := $(DOCS_WORK_DIR)/docs/rook/$(DOCS_VERSION)
+DOCS_VERSION_DIR := $(DOCS_WORK_DIR)/docs/cassandra/$(DOCS_VERSION)
 
 ifdef GIT_API_TOKEN
 DOCS_GIT_REPO := https://$(GIT_API_TOKEN)@github.com/rook/rook.github.io.git
@@ -55,7 +54,7 @@ REMOTE_NAME ?= origin
 PLATFORMS ?= $(ALL_PLATFORMS)
 
 ifneq ($(filter master release-%,$(BRANCH_NAME)),)
-FLAVORS ?= output images docs helm
+FLAVORS ?= output images docs
 else
 FLAVORS ?= output
 override BRANCH_NAME := pr/$(BRANCH_NAME)
@@ -129,20 +128,6 @@ build.docs:
 
 publish.docs:
 	cd $(DOCS_WORK_DIR) && DOCS_VERSION=$(DOCS_VERSION) $(MAKE) publish
-
-# ====================================================================================
-# helm
-
-HELM_TEMP := $(shell mktemp -d)
-HELM_URL := $(HELM_BASE_URL)/$(CHANNEL)
-
-promote.helm: $(HELM)
-#	copy existing charts to a temp dir, then combine with new charts, reindex, and upload
-	@$(S3_SYNC) s3://$(HELM_S3_BUCKET)/$(CHANNEL) $(HELM_TEMP)
-	@$(S3_SYNC) s3://$(S3_BUCKET)/build/$(BRANCH_NAME)/$(VERSION)/charts $(HELM_TEMP)
-	@$(HELM) repo index --url $(HELM_URL) $(HELM_TEMP)
-	@$(S3_SYNC_DEL) $(HELM_TEMP) s3://$(HELM_S3_BUCKET)/$(CHANNEL)
-	@rm -fr $(HELM_TEMP)
 
 # ====================================================================================
 # output

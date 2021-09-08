@@ -18,10 +18,11 @@ package sidecar
 
 import (
 	"fmt"
-	"github.com/rook/rook/pkg/operator/cassandra/constants"
-	"github.com/rook/rook/pkg/operator/cassandra/controller/util"
+
+	"github.com/rook/cassandra/pkg/operator/cassandra/constants"
+	"github.com/rook/cassandra/pkg/operator/cassandra/controller/util"
 	"github.com/yanniszark/go-nodetool/nodetool"
-	"k8s.io/api/core/v1"
+	v1 "k8s.io/api/core/v1"
 )
 
 func (m *MemberController) Sync(memberService *v1.Service) error {

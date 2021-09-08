@@ -18,9 +18,10 @@ package util
 
 import (
 	"fmt"
-	"github.com/rook/rook/pkg/daemon/util"
 
-	"github.com/rook/rook/cmd/rook/rook"
+	"github.com/rook/cassandra/pkg/daemon/util"
+
+	"github.com/rook/cassandra/cmd/rook/rook"
 	"github.com/spf13/cobra"
 )
 

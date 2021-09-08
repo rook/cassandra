@@ -27,7 +27,6 @@ import (
 	"strings"
 
 	"github.com/pkg/errors"
-	"github.com/rook/rook/pkg/clusterd"
 	v1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/resource"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -345,33 +344,6 @@ func SetNodeAntiAffinityForPod(pod *v1.PodSpec, requiredDuringScheduling bool, t
 				PodAffinityTerm: podAntiAffinity,
 			})
 	}
-}
-
-func ForceDeletePodIfStuck(clusterdContext *clusterd.Context, pod v1.Pod) error {
-	ctx := context.TODO()
-	logger.Debugf("checking if pod %q is stuck and should be force deleted", pod.Name)
-	if pod.DeletionTimestamp.IsZero() {
-		logger.Debugf("skipping pod %q restart since the pod is not deleted", pod.Name)
-		return nil
-	}
-	node, err := clusterdContext.Clientset.CoreV1().Nodes().Get(ctx, pod.Spec.NodeName, metav1.GetOptions{})
-	if err != nil {
-		return errors.Wrap(err, "node status is not available")
-	}
-	if NodeIsReady(*node) {
-		logger.Debugf("skipping restart of pod %q since the node status is ready", pod.Name)
-		return nil
-	}
-
-	logger.Infof("force deleting pod %q that appears to be stuck terminating", pod.Name)
-	var gracePeriod int64
-	deleteOpts := metav1.DeleteOptions{GracePeriodSeconds: &gracePeriod}
-	if err := clusterdContext.Clientset.CoreV1().Pods(pod.Namespace).Delete(ctx, pod.Name, deleteOpts); err != nil {
-		logger.Warningf("pod %q deletion failed. %v", pod.Name, err)
-		return nil
-	}
-	logger.Infof("pod %q deletion succeeded", pod.Name)
-	return nil
 }
 
 func RemoveDuplicateEnvVars(pod *v1.PodSpec) {
