@@ -6,6 +6,10 @@ weight: 2000
 
 # Cassandra Quickstart
 
+-----
+## **IMPORTANT:** The last planned release of Rook-Cassandra is v1.7.3
+-----
+
 Welcome to Rook! We hope you have a great experience installing the Rook **cloud-native storage orchestrator** platform to enable highly available, durable storage in your Kubernetes cluster.
 
 [Cassandra](http://cassandra.apache.org/) is a highly available, fault tolerant, peer-to-peer NoSQL database featuring lightning fast performance and tunable consistency. It provides massive scalability with no single point of failure.
