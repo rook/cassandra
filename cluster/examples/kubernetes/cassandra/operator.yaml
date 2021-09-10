@@ -92,7 +92,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: rook-cassandra-operator
-  namespace: rook-cassandra-system # namespace:operator
+  namespace: cassandra-ns-system # namespace:operator
   labels:
     app: rook-cassandra-operator
 spec:
@@ -109,8 +109,8 @@ spec:
       serviceAccountName: rook-cassandra-operator
       containers:
         - name: rook-cassandra-operator
-          image: rook/cassandra:v1.7.2
-          imagePullPolicy: "Always"
+          image: rook/cassandra:v1.7.3
+          imagePullPolicy: IfNotPresent
           args: ["cassandra", "operator"]
           env:
             - name: POD_NAME

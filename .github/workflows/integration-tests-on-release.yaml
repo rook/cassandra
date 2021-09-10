@@ -45,7 +45,7 @@ jobs:
       run: |
         GOPATH=$(go env GOPATH) make clean && make -j$nproc IMAGES='cassandra' build
         docker images
-        docker tag $(docker images|awk '/build-/ {print $1}') rook/cassandra:master
+        docker tag $(docker images|awk '/build-/ {print $1}') rook/cassandra:v1.7.3
 
     - name: TestCassandraSuite
       run: |
