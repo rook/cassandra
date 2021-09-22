@@ -20,7 +20,7 @@ Rook is hosted by the [Cloud Native Computing Foundation](https://cncf.io) (CNCF
 
 ## Getting Started and Documentation
 
-For installation, deployment, and administration of the Cassandra storage provider, see our [Documentation](https://rook.io/docs/cassandra/master).
+For installation, deployment, and administration of the Cassandra storage provider, see our [Documentation](https://rook.io/docs/cassandra/latest).
 
 ## Contributing
 
