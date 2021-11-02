@@ -92,7 +92,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: rook-cassandra-operator
-  namespace: cassandra-ns-system # namespace:operator
+  namespace: rook-cassandra-system # namespace:operator
   labels:
     app: rook-cassandra-operator
 spec:
