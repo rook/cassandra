@@ -5,7 +5,11 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/rook/cassandra)](https://goreportcard.com/report/github.com/rook/cassandra)
 [![Slack](https://slack.rook.io/badge.svg)](https://slack.rook.io)
 
-# What is Rook?
+# Deprecated
+
+The Rook Cassandra operator has been deprecated due to lack of community support. We recommend deploying Cassandra with the [k8ssandra/cass-operator](https://github.com/k8ssandra/cass-operator/) which is under more active development by the community.
+
+## What is Rook?
 
 Rook is an open source **cloud-native storage orchestrator** for Kubernetes, providing the platform, framework, and support for a diverse set of storage solutions to natively integrate with cloud-native environments.
 
@@ -18,27 +22,6 @@ We plan to continue adding support for other storage systems and environments ba
 
 Rook is hosted by the [Cloud Native Computing Foundation](https://cncf.io) (CNCF) as a [graduated](https://www.cncf.io/announcements/2020/10/07/cloud-native-computing-foundation-announces-rook-graduation/) level project. If you are a company that wants to help shape the evolution of technologies that are container-packaged, dynamically-scheduled and microservices-oriented, consider joining the CNCF. For details about who's involved and how Rook plays a role, read the CNCF [announcement](https://www.cncf.io/blog/2018/01/29/cncf-host-rook-project-cloud-native-storage-capabilities).
 
-## Getting Started and Documentation
-
-For installation, deployment, and administration of the Cassandra storage provider, see our [Documentation](https://rook.io/docs/cassandra/latest).
-
-## Contributing
-
-We welcome contributions. See [Contributing](CONTRIBUTING.md) to get started.
-
-## Report a Bug
-
-For filing bugs, suggesting improvements, or requesting new features, please open an [issue](https://github.com/rook/cassandra/issues).
-
-### Reporting Security Vulnerabilities
-
-If you find a vulnerability or a potential vulnerability in Rook please let us know immediately at
-[cncf-rook-security@lists.cncf.io](mailto:cncf-rook-security@lists.cncf.io). We'll send a confirmation email to acknowledge your
-report, and we'll send an additional email when we've identified the issues positively or
-negatively.
-
-For further details, please see the complete [security release process](SECURITY.md).
-
 ## Contact
 
 Please use the following to reach members of the community:
@@ -49,26 +32,15 @@ Please use the following to reach members of the community:
 - Email (general topics): [cncf-rook-info@lists.cncf.io](mailto:cncf-rook-info@lists.cncf.io)
 - Email (security topics): [cncf-rook-security@lists.cncf.io](mailto:cncf-rook-security@lists.cncf.io)
 
-### Community Meeting
-
-A regular community meeting takes place every other [Tuesday at 9:00 AM PT (Pacific Time)](https://zoom.us/j/392602367?pwd=NU1laFZhTWF4MFd6cnRoYzVwbUlSUT09).
-Convert to your [local timezone](http://www.thetimezoneconverter.com/?t=9:00&tz=PT%20%28Pacific%20Time%29).
-
-Any changes to the meeting schedule will be added to the [agenda doc](https://docs.google.com/document/d/1exd8_IG6DkdvyA0eiTtL2z5K2Ra-y68VByUUgwP7I9A/edit?usp=sharing) and posted to [Slack #announcements](https://rook-io.slack.com/messages/C76LLCEE7/) and the [rook-dev mailing list](https://groups.google.com/forum/#!forum/rook-dev).
-
-Anyone who wants to discuss the direction of the project, design and implementation reviews, or general questions with the broader community is welcome and encouraged to join.
-
-- Meeting link: <https://zoom.us/j/392602367?pwd=NU1laFZhTWF4MFd6cnRoYzVwbUlSUT09>
-- [Current agenda and past meeting notes](https://docs.google.com/document/d/1exd8_IG6DkdvyA0eiTtL2z5K2Ra-y68VByUUgwP7I9A/edit?usp=sharing)
-- [Past meeting recordings](https://www.youtube.com/playlist?list=PLP0uDo-ZFnQP6NAgJWAtR9jaRcgqyQKVy)
-
 ## Project Status
+
+**Deprecated**
 
 The status of each storage provider supported by Rook can be found in the [main Rook repo](https://github.com/rook/rook#project-status).
 
 | Name      | Details                                                                                                                                                                                                                                                                                                                | API Group                  | Status |
 | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- | ------ |
-| Cassandra | [Cassandra](http://cassandra.apache.org/) is a highly available NoSQL database featuring lightning fast performance, tunable consistency and massive scalability. [Scylla](https://www.scylladb.com) is a close-to-the-hardware rewrite of Cassandra in C++, which enables much lower latencies and higher throughput. | cassandra.rook.io/v1alpha1 | Alpha  |
+| Cassandra | [Cassandra](http://cassandra.apache.org/) is a highly available NoSQL database featuring lightning fast performance, tunable consistency and massive scalability. [Scylla](https://www.scylladb.com) is a close-to-the-hardware rewrite of Cassandra in C++, which enables much lower latencies and higher throughput. | cassandra.rook.io/v1alpha1 | [Deprecated](#deprecated)  |
 
 ### Official Releases
 
